@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "id_usuario": 1,
+    "fecha": "2026-04-01",
+    "total": 235000,
+    "direccion": "Av. Colón 1450, Córdoba Capital",
+    "entregado": true,
+    "productos": ["c1", "z1"]
+  },
+  {
+    "id": 2,
+    "id_usuario": 2,
+    "fecha": "2026-04-03",
+    "total": 250000,
+    "direccion": "San Martín 520, Villa Carlos Paz",
+    "entregado": false,
+    "productos": ["t1"]
+  },
+  {
+    "id": 3,
+    "id_usuario": 4,
+    "fecha": "2026-04-05",
+    "total": 355000,
+    "direccion": "Belgrano 980, Alta Gracia",
+    "entregado": true,
+    "productos": ["c2", "t2"]
+  },
+  {
+    "id": 4,
+    "id_usuario": 5,
+    "fecha": "2026-04-07",
+    "total": 95000,
+    "direccion": "Av. Sabattini 3200, Córdoba Capital",
+    "entregado": false,
+    "productos": ["c3"]
+  },
+  {
+    "id": 5,
+    "id_usuario": 3,
+    "fecha": "2026-04-09",
+    "total": 420000,
+    "direccion": "Libertad 210, Río Cuarto",
+    "entregado": true,
+    "productos": ["c4", "t3", "z3"]
+  }
+]

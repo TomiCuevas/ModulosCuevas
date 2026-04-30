@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "nombre": "Tomás",
+    "apellido": "Cuevas",
+    "email": "tomas@gmail.com",
+    "password": "1234",
+    "activo": true,
+    "direccion": "Av. Colón 1450, Córdoba Capital"
+  },
+  {
+    "id": 2,
+    "nombre": "Juan",
+    "apellido": "Pérez",
+    "email": "juanperez@gmail.com",
+    "password": "juan1234",
+    "activo": true,
+    "direccion": "San Martín 520, Villa Carlos Paz"
+  },
+  {
+    "id": 3,
+    "nombre": "Martín",
+    "apellido": "Gómez",
+    "email": "martingomez@hotmail.com",
+    "password": "martin2026",
+    "activo": false,
+    "direccion": "Libertad 210, Río Cuarto"
+  },
+  {
+    "id": 4,
+    "nombre": "Luciano",
+    "apellido": "Sosa",
+    "email": "lucianososa@gmail.com",
+    "password": "lucho321",
+    "activo": true,
+    "direccion": "Belgrano 980, Alta Gracia"
+  },
+  {
+    "id": 5,
+    "nombre": "Franco",
+    "apellido": "Ramírez",
+    "email": "francoramirez@outlook.com",
+    "password": "franco999",
+    "activo": true,
+    "direccion": "Av. Sabattini 3200, Córdoba Capital"
+  }
+]
