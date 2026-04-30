@@ -1,0 +1,24 @@
+{
+  "name": "moduloscuevas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "module",
+    "url": "git+https://github.com/TomiCuevas/ModulosCuevas.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/TomiCuevas/ModulosCuevas/issues"
+  },
+  "homepage": "https://github.com/TomiCuevas/ModulosCuevas#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
