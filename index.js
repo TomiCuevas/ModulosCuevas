@@ -233,14 +233,34 @@ app.put("/products/price/update/:id", async (req, res) => {
       });
     }
 
-    const precioAnterior = products[productIndex].price;
+    const productoBase = products[productIndex];
+    const tituloProducto = productoBase.title;
+    const precioAnterior = productoBase.price;
 
-    // Actualiza SOLO el producto elegido
-    products[productIndex].price = nuevoPrecio;
+    // Actualiza el producto elegido y los destacados/duplicados con el mismo título
+    const productosActualizados = [];
 
-    // Recalcula SOLO las ventas que contienen ese producto
+    products.forEach(product => {
+      if (product.title === tituloProducto) {
+        product.price = nuevoPrecio;
+        productosActualizados.push({
+          id: product.id,
+          title: product.title,
+          category: product.category
+        });
+      }
+    });
+
+    // IDs afectados: producto original + duplicados destacados
+    const idsProductosActualizados = productosActualizados.map(p => p.id);
+
+    // Recalcula ventas que contengan alguno de esos productos
     const ventasActualizadas = sales.map(sale => {
-      if (!sale.productos.includes(productId)) {
+      const ventaTieneProductoActualizado = sale.productos.some(prodId =>
+        idsProductosActualizados.includes(prodId)
+      );
+
+      if (!ventaTieneProductoActualizado) {
         return sale;
       }
 
@@ -259,16 +279,17 @@ app.put("/products/price/update/:id", async (req, res) => {
     await writeFile("./data/ventas.json", JSON.stringify(ventasActualizadas, null, 2));
 
     const ventasModificadas = ventasActualizadas.filter(sale =>
-      sale.productos.includes(productId)
+      sale.productos.some(prodId => idsProductosActualizados.includes(prodId))
     );
 
     res.status(200).json({
       mensaje: "Precio actualizado correctamente",
-      producto: products[productIndex].title,
+      producto: tituloProducto,
       precioAnterior,
       nuevoPrecio,
+      productosActualizados: productosActualizados.length,
       ventasAfectadas: ventasModificadas.length,
-      detalle: "Se recalcularon automáticamente los totales de las ventas relacionadas."
+      detalle: "Se actualizaron el producto original y sus destacados relacionados. También se recalcularon las ventas afectadas."
     });
 
   } catch (error) {
@@ -277,7 +298,6 @@ app.put("/products/price/update/:id", async (req, res) => {
     });
   }
 });
-
 /* =========================
    DELETE
 ========================= */

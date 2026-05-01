@@ -93,7 +93,7 @@
     "id": "t6",
     "title": "Traje Rojo Premium",
     "description": "Tejido francés, calidad superior.",
-    "price": 300000,
+    "price": 290000,
     "img": "../styles/img/trajes/trajerojo.webp",
     "category": "trajes",
     "disponible": true
@@ -120,7 +120,7 @@
     "id": "z3",
     "title": "Zapato Azul Noche",
     "description": "Modelo exclusivo estilo europeo.",
-    "price": 160000,
+    "price": 150000,
     "img": "../styles/img/zapatos/zapatoazulnoche.webp",
     "category": "zapatos",
     "disponible": true
@@ -156,7 +156,7 @@
     "id": "d3",
     "title": "Zapato Azul Noche",
     "description": "Modelo exclusivo estilo europeo.",
-    "price": 160000,
+    "price": 150000,
     "img": "../styles/img/zapatos/zapatoazulnoche.webp",
     "category": "destacados",
     "disponible": true
@@ -183,7 +183,7 @@
     "id": "d6",
     "title": "Traje Rojo Premium",
     "description": "Tejido francés, calidad superior.",
-    "price": 300000,
+    "price": 290000,
     "img": "../styles/img/trajes/trajerojo.webp",
     "category": "destacados",
     "disponible": true
