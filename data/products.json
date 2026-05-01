@@ -120,7 +120,7 @@
     "id": "z3",
     "title": "Zapato Azul Noche",
     "description": "Modelo exclusivo estilo europeo.",
-    "price": 150000,
+    "price": 290000,
     "img": "../styles/img/zapatos/zapatoazulnoche.webp",
     "category": "zapatos",
     "disponible": true
@@ -156,7 +156,7 @@
     "id": "d3",
     "title": "Zapato Azul Noche",
     "description": "Modelo exclusivo estilo europeo.",
-    "price": 150000,
+    "price": 290000,
     "img": "../styles/img/zapatos/zapatoazulnoche.webp",
     "category": "destacados",
     "disponible": true

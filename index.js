@@ -6,9 +6,7 @@ const PORT = 3001;
 
 app.use(express.json());
 
-/* =========================
-   FUNCIONES PARA LEER JSON
-========================= */
+//FUNCIONES PARA LEER LOS ARCHIVOS JSON
 
 const getProducts = async () => {
   const data = await readFile("./data/products.json", "utf-8");
@@ -25,28 +23,8 @@ const getSales = async () => {
   return JSON.parse(data);
 };
 
-/* =========================
-   GET BÁSICOS
-========================= */
 
-app.get("/products", async (req, res) => {
-  const products = await getProducts();
-  res.json(products);
-});
-
-app.get("/users", async (req, res) => {
-  const users = await getUsers();
-  res.json(users);
-});
-
-app.get("/sales", async (req, res) => {
-  const sales = await getSales();
-  res.json(sales);
-});
-
-/* =========================
-   GET AVANZADO 1
-========================= */
+//GET 1
 
 app.get("/sales/detail/:id", async (req, res) => {
   const sales = await getSales();
@@ -73,9 +51,8 @@ app.get("/sales/detail/:id", async (req, res) => {
   });
 });
 
-/* =========================
-   GET AVANZADO 2
-========================= */
+//GET 2
+
 
 app.get("/products/most-sold", async (req, res) => {
   const sales = await getSales();
@@ -102,9 +79,8 @@ app.get("/products/most-sold", async (req, res) => {
   });
 });
 
-/* =========================
-   POST 1 - LOGIN
-========================= */
+//POST 1
+
 
 app.post("/login", async (req, res) => {
   const users = await getUsers();
@@ -130,9 +106,7 @@ app.post("/login", async (req, res) => {
   });
 });
 
-/* =========================
-   POST 2 - CREAR USUARIO (usa writeFile)
-========================= */
+//POST 2
 
 app.post("/users/create", async (req, res) => {
   try {
@@ -167,9 +141,8 @@ app.post("/users/create", async (req, res) => {
   }
 });
 
-/* =========================
-   POST 3 - Ventas de usuario (con productos completos)
-========================= */
+//POST 3 
+
 
 app.post("/sales/user", async (req, res) => {
   const users = await getUsers();
@@ -204,9 +177,7 @@ app.post("/sales/user", async (req, res) => {
   });
 });
 
-/* =========================
-   PUT
-========================= */
+//PUT
 
 app.put("/products/price/update/:id", async (req, res) => {
   try {
@@ -232,7 +203,6 @@ app.put("/products/price/update/:id", async (req, res) => {
     const tituloProducto = productoBase.title;
     const precioAnterior = productoBase.price;
 
-    // Actualiza el producto elegido y los destacados/duplicados con el mismo título
     const productosActualizados = [];
 
     products.forEach(product => {
@@ -246,10 +216,8 @@ app.put("/products/price/update/:id", async (req, res) => {
       }
     });
 
-    // IDs afectados: producto original + duplicados destacados
     const idsProductosActualizados = productosActualizados.map(p => p.id);
 
-    // Recalcula ventas que contengan alguno de esos productos
     const ventasActualizadas = sales.map(sale => {
       const ventaTieneProductoActualizado = sale.productos.some(prodId =>
         idsProductosActualizados.includes(prodId)
@@ -293,9 +261,8 @@ app.put("/products/price/update/:id", async (req, res) => {
     });
   }
 });
-/* =========================
-   DELETE
-========================= */
+
+//DELETE
 
 app.delete("/users/delete/:id", async (req, res) => {
   try {
@@ -341,9 +308,7 @@ app.delete("/users/delete/:id", async (req, res) => {
   }
 });
 
-/* =========================
-   SERVER
-========================= */
+//SERVER
 
 app.listen(PORT, () => {
   console.log(`Servidor levantado en puerto ${PORT}`);

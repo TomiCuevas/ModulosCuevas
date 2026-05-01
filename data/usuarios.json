@@ -51,15 +51,15 @@
     "email": "lucas@gmail.com",
     "password": "1234",
     "activo": true,
-    "direccion": "Av. Siempre Viva 742"
+    "direccion": "Av. Maestro Vidal 742"
   },
   {
     "id": 7,
-    "nombre": "Lucas",
-    "apellido": "Fernandez",
-    "email": "lucas@gmail.com",
+    "nombre": "Liliana",
+    "apellido": "Dominguez",
+    "email": "liliana@gmail.com",
     "password": "1234",
     "activo": true,
-    "direccion": "Av. Siempre Viva 742"
+    "direccion": "Av. Velez Sarsfield 52"
   }
 ]
