@@ -48,7 +48,7 @@
     "id": "t1",
     "title": "Traje Negro Clásico",
     "description": "Ideal para eventos formales.",
-    "price": 250000,
+    "price": 300000,
     "img": "../styles/img/trajes/TrajeDeVestir.webp",
     "category": "trajes",
     "disponible": true

@@ -209,7 +209,122 @@ app.post("/sales/user", async (req, res) => {
   });
 });
 
+/* =========================
+   PUT
+========================= */
 
+app.put("/products/price/update/:id", async (req, res) => {
+  try {
+    const products = await getProducts();
+    const sales = await getSales();
+
+    const productId = req.params.id;
+    const nuevoPrecio = Number(req.body.price);
+
+    const productIndex = products.findIndex(p => p.id === productId);
+
+    if (productIndex === -1) {
+      return res.status(404).json({ error: "Producto no encontrado" });
+    }
+
+    if (!nuevoPrecio || nuevoPrecio <= 0) {
+      return res.status(400).json({
+        error: "El precio debe ser un número mayor a 0"
+      });
+    }
+
+    const precioAnterior = products[productIndex].price;
+
+    // Actualiza SOLO el producto elegido
+    products[productIndex].price = nuevoPrecio;
+
+    // Recalcula SOLO las ventas que contienen ese producto
+    const ventasActualizadas = sales.map(sale => {
+      if (!sale.productos.includes(productId)) {
+        return sale;
+      }
+
+      const nuevoTotal = sale.productos.reduce((acc, prodId) => {
+        const productoEncontrado = products.find(p => p.id === prodId);
+        return acc + (productoEncontrado ? productoEncontrado.price : 0);
+      }, 0);
+
+      return {
+        ...sale,
+        total: nuevoTotal
+      };
+    });
+
+    await writeFile("./data/products.json", JSON.stringify(products, null, 2));
+    await writeFile("./data/ventas.json", JSON.stringify(ventasActualizadas, null, 2));
+
+    const ventasModificadas = ventasActualizadas.filter(sale =>
+      sale.productos.includes(productId)
+    );
+
+    res.status(200).json({
+      mensaje: "Precio actualizado correctamente",
+      producto: products[productIndex].title,
+      precioAnterior,
+      nuevoPrecio,
+      ventasAfectadas: ventasModificadas.length,
+      detalle: "Se recalcularon automáticamente los totales de las ventas relacionadas."
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      error: "Error al actualizar el precio del producto"
+    });
+  }
+});
+
+/* =========================
+   DELETE
+========================= */
+
+app.delete("/users/delete/:id", async (req, res) => {
+  try {
+    const users = await getUsers();
+    const sales = await getSales();
+
+    const userId = Number(req.params.id);
+
+    const userIndex = users.findIndex(u => u.id === userId);
+
+    if (userIndex === -1) {
+      return res.status(404).json({
+        error: "Usuario no encontrado"
+      });
+    }
+
+    const ventasDelUsuario = sales.filter(s => s.id_usuario === userId);
+
+    const ventasRestantes = sales.filter(s => s.id_usuario !== userId);
+
+    const usuarioEliminado = users.splice(userIndex, 1)[0];
+
+    await writeFile(
+      "./data/ventas.json",
+      JSON.stringify(ventasRestantes, null, 2)
+    );
+
+    await writeFile(
+      "./data/usuarios.json",
+      JSON.stringify(users, null, 2)
+    );
+
+    res.status(200).json({
+      mensaje: "Usuario eliminado correctamente junto con sus ventas asociadas",
+      usuarioEliminado: `${usuarioEliminado.nombre} ${usuarioEliminado.apellido}`,
+      ventasEliminadas: ventasDelUsuario.length
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      error: "Error al eliminar usuario"
+    });
+  }
+});
 
 /* =========================
    SERVER
