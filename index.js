@@ -89,21 +89,16 @@ app.get("/products/most-sold", async (req, res) => {
     });
   });
 
-  let maxId = null;
-  let maxCantidad = 0;
+  const maxCantidad = Math.max(...Object.values(contador));
 
-  for (const id in contador) {
-    if (contador[id] > maxCantidad) {
-      maxCantidad = contador[id];
-      maxId = id;
-    }
-  }
-
-  const producto = products.find(p => p.id === maxId);
+  const productosMasVendidos = Object.keys(contador)
+    .filter(prodId => contador[prodId] === maxCantidad)
+    .map(prodId => products.find(p => p.id === prodId));
 
   res.status(200).json({
-    producto,
-    veces_vendido: maxCantidad
+    mensaje: "Producto/s más vendido/s",
+    vecesVendidos: maxCantidad,
+    productos: productosMasVendidos
   });
 });
 
