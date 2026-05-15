@@ -3,6 +3,7 @@ import fs from "fs/promises";
 
 const router = express.Router();
 
+// LOGIN
 router.post("/login", async (req, res) => {
 
     try {
@@ -40,7 +41,81 @@ router.post("/login", async (req, res) => {
 
 });
 
-// PUT actualizar usuario
+// CREAR USUARIO
+router.post("/create", async (req, res) => {
+
+    try {
+
+        const data = await fs.readFile(
+            "./data/usuarios.json",
+            "utf-8"
+        );
+
+        const users = JSON.parse(data);
+
+        const {
+            nombre,
+            apellido,
+            email,
+            password,
+            direccion
+        } = req.body;
+
+        if (!nombre || !apellido || !email || !password) {
+
+            return res.status(400).json({
+                message: "Faltan datos obligatorios"
+            });
+
+        }
+
+        const existingUser = users.find(
+            user => user.email === email
+        );
+
+        if (existingUser) {
+
+            return res.status(409).json({
+                message: "El email ya está registrado"
+            });
+
+        }
+
+        const newUser = {
+            id: users.length
+                ? Math.max(...users.map(user => user.id)) + 1
+                : 1,
+            nombre,
+            apellido,
+            email,
+            password,
+            activo: true,
+            direccion: direccion || ""
+        };
+
+        users.push(newUser);
+
+        await fs.writeFile(
+            "./data/usuarios.json",
+            JSON.stringify(users, null, 2)
+        );
+
+        res.status(201).json({
+            message: "Usuario creado correctamente",
+            user: newUser
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: "Error creando usuario"
+        });
+
+    }
+
+});
+
+// ACTUALIZAR USUARIO
 router.put("/update/:id", async (req, res) => {
 
     try {
@@ -68,7 +143,8 @@ router.put("/update/:id", async (req, res) => {
 
         users[userIndex] = {
             ...users[userIndex],
-            ...req.body
+            ...req.body,
+            id: users[userIndex].id
         };
 
         await fs.writeFile(
@@ -91,29 +167,49 @@ router.put("/update/:id", async (req, res) => {
 
 });
 
-// DELETE usuario y sus ventas asociadas
+// ELIMINAR USUARIO Y SUS VENTAS
 router.delete("/delete/:id", async (req, res) => {
+
     try {
-        const usersData = await fs.readFile("./data/usuarios.json", "utf-8");
-        const salesData = await fs.readFile("./data/ventas.json", "utf-8");
+
+        const usersData = await fs.readFile(
+            "./data/usuarios.json",
+            "utf-8"
+        );
+
+        const salesData = await fs.readFile(
+            "./data/ventas.json",
+            "utf-8"
+        );
 
         let users = JSON.parse(usersData);
         let sales = JSON.parse(salesData);
 
         const userId = Number(req.params.id);
 
-        const user = users.find(u => u.id === userId);
+        const user = users.find(
+            u => u.id === userId
+        );
 
         if (!user) {
+
             return res.status(404).json({
                 message: "Usuario no encontrado"
             });
+
         }
 
-        const ventasDelUsuario = sales.filter(sale => sale.id_usuario === userId);
+        const ventasDelUsuario = sales.filter(
+            sale => sale.id_usuario === userId
+        );
 
-        users = users.filter(u => u.id !== userId);
-        sales = sales.filter(sale => sale.id_usuario !== userId);
+        users = users.filter(
+            u => u.id !== userId
+        );
+
+        sales = sales.filter(
+            sale => sale.id_usuario !== userId
+        );
 
         await fs.writeFile(
             "./data/usuarios.json",
@@ -132,11 +228,13 @@ router.delete("/delete/:id", async (req, res) => {
         });
 
     } catch (error) {
+
         res.status(500).json({
             message: "Error eliminando usuario y sus ventas asociadas"
         });
-    }
-});
 
+    }
+
+});
 
 export default router;

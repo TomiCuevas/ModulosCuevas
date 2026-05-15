@@ -26,7 +26,7 @@
     "id": 3,
     "id_usuario": 4,
     "fecha": "2026-04-05",
-    "total": 350000,
+    "total": 345000,
     "direccion": "Belgrano 980, Alta Gracia",
     "entregado": true,
     "productos": [
@@ -62,7 +62,7 @@
     "id": 6,
     "id_usuario": 1,
     "fecha": "2026-05-15",
-    "total": 780000,
+    "total": 260000,
     "direccion": "Av. Colón 1450, Córdoba Capital",
     "entregado": false,
     "productos": [
@@ -73,12 +73,64 @@
     "id": 7,
     "id_usuario": 1,
     "fecha": "2026-05-15",
-    "total": 455000,
+    "total": 440000,
     "direccion": "Av. Colón 1450, Córdoba Capital",
-    "entregado": false,
+    "entregado": true,
     "productos": [
       "z3",
       "z4"
+    ]
+  },
+  {
+    "id": 8,
+    "id_usuario": 2,
+    "fecha": "2026-05-15",
+    "total": 385000,
+    "direccion": "Av. Colón 1450",
+    "entregado": false,
+    "productos": [
+      "c1",
+      "z1"
+    ]
+  },
+  {
+    "id": 9,
+    "id_usuario": 6,
+    "fecha": "2026-05-15",
+    "total": 375000,
+    "direccion": "Av. Maestro Vidal 742",
+    "entregado": false,
+    "productos": [
+      "c3",
+      "c2"
+    ]
+  },
+  {
+    "id": 10,
+    "id_usuario": 6,
+    "fecha": "2026-05-15",
+    "total": 1190000,
+    "direccion": "Av. Maestro Vidal 742",
+    "entregado": false,
+    "productos": [
+      "d2",
+      "d2",
+      "z3",
+      "z4",
+      "z4"
+    ]
+  },
+  {
+    "id": 11,
+    "id_usuario": 2,
+    "fecha": "2026-05-15",
+    "total": 460000,
+    "direccion": "Av. Colón 1450",
+    "entregado": false,
+    "productos": [
+      "z2",
+      "z2",
+      "z1"
     ]
   }
 ]
