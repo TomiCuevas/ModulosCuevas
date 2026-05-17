@@ -73,7 +73,7 @@
     "id": 7,
     "id_usuario": 1,
     "fecha": "2026-05-15",
-    "total": 440000,
+    "total": 430000,
     "direccion": "Av. Colón 1450, Córdoba Capital",
     "entregado": true,
     "productos": [
@@ -85,7 +85,7 @@
     "id": 8,
     "id_usuario": 2,
     "fecha": "2026-05-15",
-    "total": 385000,
+    "total": 235000,
     "direccion": "Av. Colón 1450",
     "entregado": false,
     "productos": [
@@ -97,7 +97,7 @@
     "id": 9,
     "id_usuario": 6,
     "fecha": "2026-05-15",
-    "total": 375000,
+    "total": 185000,
     "direccion": "Av. Maestro Vidal 742",
     "entregado": false,
     "productos": [
@@ -109,7 +109,7 @@
     "id": 10,
     "id_usuario": 6,
     "fecha": "2026-05-15",
-    "total": 1190000,
+    "total": 1170000,
     "direccion": "Av. Maestro Vidal 742",
     "entregado": false,
     "productos": [
@@ -137,7 +137,7 @@
     "id": 12,
     "id_usuario": 5,
     "fecha": "2026-05-16",
-    "total": 1205000,
+    "total": 1175000,
     "direccion": "Av. Sabattini 3200, Córdoba Capital",
     "entregado": false,
     "productos": [
@@ -147,6 +147,18 @@
       "z4",
       "z4",
       "z4"
+    ]
+  },
+  {
+    "id": 13,
+    "id_usuario": 1,
+    "fecha": "2026-05-17",
+    "total": 600000,
+    "direccion": "Gilardo Gilardi 555",
+    "entregado": false,
+    "productos": [
+      "d2",
+      "d2"
     ]
   }
 ]

@@ -17,7 +17,31 @@ Devuelve todos los productos disponibles para la venta.
 
 ---
 
-### GET 2 - Productos por categoría
+### GET 2 - Filtrado dinámico de productos
+
+GET http://localhost:3001/products/filter
+
+Permite filtrar productos dinámicamente utilizando query params.
+
+Ejemplos:
+
+Filtrar por categoría:
+
+http://localhost:3001/products/filter?category=camisas
+
+Filtrar por precio máximo:
+
+http://localhost:3001/products/filter?maxPrice=100000
+
+Filtrar por categoría y precio:
+
+http://localhost:3001/products/filter?category=zapatos&maxPrice=200000
+
+Este endpoint implementa una lógica de filtrado escalable desde el backend, permitiendo que el frontend consuma únicamente la información necesaria.
+
+---
+
+### GET 3 - Productos por categoría
 
 GET http://localhost:3001/products/category/camisas
 
@@ -31,7 +55,7 @@ Categorías disponibles:
 
 ---
 
-### GET 3 - Detalle de venta
+### GET 4 - Detalle de venta
 
 GET http://localhost:3001/sales/detail/1
 
@@ -42,7 +66,7 @@ Obtiene el detalle de una venta específica, incluyendo:
 
 ---
 
-### GET 4 - Producto más vendido
+### GET 5 - Producto más vendido
 
 GET http://localhost:3001/products/most-sold
 
@@ -215,7 +239,10 @@ https://github.com/TomiCuevas/zammot-ecommerce
 - Se utilizan métodos GET, POST, PUT y DELETE.
 - El frontend consume el backend mediante fetch.
 - El proyecto utiliza arquitectura multirepo separando frontend y backend.
+- Se implementa filtrado dinámico y escalable desde el backend utilizando query params.
 
 ---
+
 ## Autor
+
 Tomás Cuevas

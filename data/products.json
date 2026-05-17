@@ -129,7 +129,7 @@
     "id": "z4",
     "title": "Zapato Ejecutivo Premium",
     "description": "Comodidad superior todo el día.",
-    "price": 150000,
+    "price": 140000,
     "img": "../styles/img/zapatos/zapatoejecutivo.webp",
     "category": "zapatos",
     "disponible": true

@@ -26,6 +26,61 @@ router.get("/", async (req, res) => {
 
 });
 
+// FILTRAR PRODUCTOS POR QUERY PARAMS
+router.get("/filter", async (req, res) => {
+
+    try {
+
+        const data = await fs.readFile(
+            "./data/products.json",
+            "utf-8"
+        );
+
+        let products = JSON.parse(data);
+
+        const {
+            category,
+            maxPrice
+        } = req.query;
+
+        if (category && category !== "all") {
+
+            products = products.filter(
+                product => product.category === category
+            );
+
+        }
+
+        if (maxPrice) {
+
+            const priceLimit = Number(maxPrice);
+
+            if (!Number.isFinite(priceLimit) || priceLimit <= 0) {
+
+                return res.status(400).json({
+                    message: "Precio máximo inválido"
+                });
+
+            }
+
+            products = products.filter(
+                product => Number(product.price) <= priceLimit
+            );
+
+        }
+
+        res.status(200).json(products);
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: "Error filtrando productos"
+        });
+
+    }
+
+});
+
 router.get("/category/:category", async (req, res) => {
 
     try {
@@ -89,9 +144,15 @@ router.get("/most-sold", async (req, res) => {
 
         });
 
-        const maxSold = Math.max(
-            ...Object.values(counter)
-        );
+        const soldValues = Object.values(counter);
+
+        if (soldValues.length === 0) {
+
+            return res.status(200).json([]);
+
+        }
+
+        const maxSold = Math.max(...soldValues);
 
         const mostSoldIds = Object.keys(counter)
             .filter(id => counter[id] === maxSold);
